@@ -8,19 +8,19 @@ const int MarkSize = 5;
 
 const int NameSize = 20;
 
-string Names[NameSize] ={"Petr","Lev","Ivan","Vova","Sergiy",
+char Names[NameSize][NameSize] ={"Petr","Lev","Ivan","Vova","Sergiy",
 		"Alex","Artem","Taras","Andriy","Oleg",
 		"Avgust","Igor","Nazar","Mars","Maks",
 		"Stas","Jul","Gogi","Victor", "Harry"};  
-string Sirnames[NameSize] = {"Ivanov","Petrov","Sidorov","Gavrilov","Artemov",
+char Sirnames[NameSize][NameSize] = {"Ivanov","Petrov","Sidorov","Gavrilov","Artemov",
 		"Markus","Nemirov","Klaus","Bah","Folk",
 		"Petrik","Kuv","Zaets","Tek","Open",
 		"Len","Hok","Kletz","Haug", "Potter"};
 
 struct Student
 {
-	string Name;
-	string Sirname;
+	char Name[NameSize];
+	char Sirname[NameSize];
 	int Marks[MarkSize];
 	double Average;
 };
@@ -30,18 +30,19 @@ void Init(Student* pStud, int Size)
 	for(int i = 0; i < Size; ++i)
 	{ 
 		int randomIndex = rand() % NameSize;
-		pStud[i].Name = Names[randomIndex];
-		pStud[i].Sirname = Sirnames[randomIndex];
+		strcpy(pStud[i].Name, Names[randomIndex]);
+		randomIndex = rand() % NameSize;
+		strcpy(pStud[i].Sirname, Sirnames[randomIndex]);
 		pStud[i].Average = 0;
-		cout << "Enter marks for " << pStud[i].Name << " " << pStud[i].Sirname << endl;
+		//cout << "Enter marks for " << pStud[i].Name << " " << pStud[i].Sirname << endl;
 		for (int j = 0; j < MarkSize; ++j)
 		{
-			cout << "Enter mark " << j << ": ";
-			cin >> pStud[i].Marks[j];
-			//pStud[i].Marks[j]=rand()%5 + 1;
+			//cout << "Enter mark " << j << ": ";
+			//cin >> pStud[i].Marks[j];
+			pStud[i].Marks[j]=rand()%5 + 1;
 			pStud[i].Average += pStud[i].Marks[j];
 		}
-			pStud[i].Average = pStud[i].Average /5.0;
+		pStud[i].Average = pStud[i].Average /5.0;
 	}
 }
 
